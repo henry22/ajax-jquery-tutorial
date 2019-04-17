@@ -29,7 +29,11 @@ app.get("/todos", function(req, res){
     if(err){
       console.log(err);
     } else {
-      res.render("index", {todos: todos}); 
+      if(req.xhr) {
+        res.json(todos);
+      } else {
+        res.render("index", { todos: todos });
+      }
     }
   })
 });
