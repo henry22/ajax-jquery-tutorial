@@ -5,7 +5,9 @@ bodyParser = require("body-parser"),
 expressSanitizer = require("express-sanitizer"),
 methodOverride = require('method-override');
 
-mongoose.connect("mongodb://localhost/todo_app");
+mongoose.connect("mongodb://localhost/todo_app", {
+  useMongoClient: true
+});
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
