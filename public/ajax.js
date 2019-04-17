@@ -1,1 +1,3 @@
-alert('hello world');
+$.get('/todos', function(data) {
+    debugger
+});
