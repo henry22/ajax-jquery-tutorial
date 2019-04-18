@@ -1,13 +1,29 @@
-$.get('/todos', function(data) {
-    console.log(data);
-});
+// $.get('/todos', function(data) {
+//     console.log(data);
+// });
 
-$('form').submit(function(e) {
+// $('form').submit(function(e) {
+//     e.preventDefault();
+
+//     var formData = $(this).serialize();
+
+//     $.post('/todos', formData, function(data) {
+//         console.log(data);
+//     });
+// });
+
+$('form').submit(function (e) {
     e.preventDefault();
 
     var formData = $(this).serialize();
+    var formAction = $(this).attr('action');
 
-    $.post('/todos', formData, function(data) {
-        console.log(data);
+    $.ajax({
+        url: formAction,
+        data: formData,
+        type: 'PUT',
+        success: function(data) {
+            debugger;
+        }
     });
-})
+});
