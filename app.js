@@ -39,13 +39,13 @@ app.get("/todos", function(req, res){
 });
 
 app.get("/todos/new", function(req, res){
- res.render("new"); 
+  res.render("new"); 
 });
 
 app.post("/todos", function(req, res){
- req.body.todo.text = req.sanitize(req.body.todo.text);
- var formData = req.body.todo;
- Todo.create(formData, function(err, newTodo){
+  req.body.todo.text = req.sanitize(req.body.todo.text);
+  var formData = req.body.todo;
+  Todo.create(formData, function(err, newTodo){
     if(err){
       res.render("new");
     } else {
@@ -55,14 +55,14 @@ app.post("/todos", function(req, res){
 });
 
 app.get("/todos/:id/edit", function(req, res){
- Todo.findById(req.params.id, function(err, todo){
-   if(err){
-     console.log(err);
-     res.redirect("/")
-   } else {
+  Todo.findById(req.params.id, function(err, todo){
+    if(err){
+      console.log(err);
+      res.redirect("/")
+    } else {
       res.render("edit", {todo: todo});
-   }
- });
+    }
+  });
 });
 
 app.put("/todos/:id", function(req, res){
