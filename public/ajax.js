@@ -27,7 +27,7 @@ $('#todo-list').on('click', '.edit-button', function() {
     $(this).parent().siblings('.edit-item-form').toggle();
 });
 
-$('#todo-list').on('click', '.edit-item-form', function(e) {
+$('#todo-list').on('submit', '.edit-item-form', function(e) {
     e.preventDefault();
 
     var toDoItem = $(this).serialize();
@@ -61,4 +61,26 @@ $('#todo-list').on('click', '.edit-item-form', function(e) {
             `);
         }
     });
+});
+
+$('#todo-list').on('submit', '.delete-item-form', function(e) {
+    e.preventDefault();
+
+    var confirmResponse = confirm('Are you sure?');
+
+    if(confirmResponse) {
+        var actionUrl = $(this).attr('action');
+        var $itemToDelete = $(this).closest('.list-group-item');
+
+        $.ajax({
+            url: actionUrl,
+            type: 'DELETE',
+            itemToDelete: $itemToDelete,
+            success: function(data) {
+                this.itemToDelete.remove();
+            }
+        });
+    } else {
+        $(this).find('button').blur();
+    }
 })
